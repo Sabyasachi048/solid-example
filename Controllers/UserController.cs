@@ -20,7 +20,7 @@ namespace SolidExample.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/values
+        // GET: user
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -34,13 +34,28 @@ namespace SolidExample.Controllers
             }
         }
 
-        // GET api/values/5
+        // GET: user/send/5
+        [HttpGet("send/{id}")]
+        public async Task<IActionResult> SendEmail([Required] Guid id)
+        {
+            try
+            {
+                var user  = await _service.GetByIdAsync(id);
+                return Ok(_service.SendEmail(user.Email));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // GET user/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([Required] Guid id)
         {
             try
             {
-                return Ok(_mapper.Map<UserDto>(await _service.GetById(id)));
+                return Ok(_mapper.Map<UserDto>(await _service.GetByIdAsync(id)));
             }
             catch(Exception ex)
             {
@@ -53,7 +68,7 @@ namespace SolidExample.Controllers
         {
             try
             {
-                await _service.AddOrUpdate(_mapper.Map<UserBO>(entity));
+                await _service.AddOrUpdateAsync(_mapper.Map<UserBO>(entity));
                 return Ok();
             }
             catch(Exception ex) 
@@ -63,13 +78,13 @@ namespace SolidExample.Controllers
         }
 
 
-        // DELETE api/values/5
+        // DELETE user/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([Required] Guid id)
         {
             try
             {
-                await _service.Remove(id);
+                await _service.RemoveAsync(id);
                 return Ok();
             }
             catch (Exception ex) { 

@@ -15,7 +15,7 @@ namespace SolidExample.Services
             _service = service;
             _mapper = mapper;
         }
-        public async Task AddOrUpdate(UserBO entry)
+        public async Task AddOrUpdateAsync(UserBO entry)
         {
             await _service.AddOrUpdateAsync(_mapper.Map<User>(entry));
         }
@@ -25,11 +25,11 @@ namespace SolidExample.Services
             return result;
 
         }
-        public async Task<UserBO> GetById(Guid id)
+        public async Task<UserBO> GetByIdAsync(Guid id)
         {
             return _mapper.Map<UserBO>(await _service.GetByIdAsync(id));
         }
-        public async Task Remove(Guid id)
+        public async Task RemoveAsync(Guid id)
         {
             await _service.RemoveAsync(id);
         }
@@ -37,6 +37,12 @@ namespace SolidExample.Services
         {
             var whereResult = _service.Where(exp);
             return _mapper.Map<IEnumerable<UserBO>>(whereResult);
+        }
+
+        public string SendEmail(string email)
+        {
+            var user = _service.Where(user => user.Email == email).First();
+            return $"Welcome {user.DisplayName}!";
         }
     }
 }

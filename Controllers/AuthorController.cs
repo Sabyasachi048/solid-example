@@ -41,7 +41,7 @@ namespace SolidExample.Controllers
         {
             try
             {
-                return Ok(_mapper.Map<AuthorDto>(await _service.GetById(id)));
+                return Ok(_mapper.Map<AuthorDto>(await _service.GetByIdAsync(id)));
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace SolidExample.Controllers
         {
             try
             {
-                await _service.AddOrUpdate(_mapper.Map<AuthorBO>(entity));
+                await _service.AddOrUpdateAsync(_mapper.Map<AuthorBO>(entity));
                 return Ok();
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace SolidExample.Controllers
         {
             try
             {
-                await _service.Remove(id);
+                await _service.RemoveAsync(id);
                 return Ok();
             }
             catch (Exception ex)

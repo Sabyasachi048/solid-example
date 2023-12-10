@@ -6,10 +6,10 @@ namespace SolidExample.Services
 {
     public interface IArticleService
     {
-        Task AddOrUpdate(ArticleBO entry);
+        Task AddOrUpdateAsync(ArticleBO entry);
         Task<IEnumerable<ArticleBO>> GetAsync();
-        Task<ArticleBO> GetById(Guid id);
-        Task Remove(Guid id);
+        Task<ArticleBO> GetByIdAsync(Guid id);
+        Task RemoveAsync(Guid id);
         IEnumerable<ArticleBO> Where(Expression<Func<Article, bool>> exp);
     }
 }

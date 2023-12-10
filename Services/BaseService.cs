@@ -14,12 +14,12 @@ namespace SolidExample.Services
 
         public async Task<IEnumerable<T>> GetAsync()
         {
-            return await _repository.GetAll();
+            return await _repository.GetAllAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _repository.GetById(id);
+            return await _repository.GetByIdAsync(id);
         }
 
         public IEnumerable<T> Where(Expression<Func<T, bool>> exp)
@@ -29,24 +29,24 @@ namespace SolidExample.Services
 
         public async Task AddOrUpdateAsync(T entry)
         {
-            var targetRecord = _repository.GetById(entry.Id).Result;
+            var targetRecord = _repository.GetByIdAsync(entry.Id).Result;
             var exists = targetRecord != null;
 
             if (exists)
             {
                 entry.UpdatedAt = DateTime.UtcNow;
-                await _repository.Update(entry);
+                await _repository.UpdateAsync(entry);
                 return;
             }
 
             entry.CreatedAt = DateTime.UtcNow;
-            await _repository.Insert(entry);
+            await _repository.InsertAsync(entry);
         }
 
         public async Task RemoveAsync(Guid id)
         {
-            var label = await _repository.GetById(id);
-            await _repository.Delete(label);
+            var label = await _repository.GetByIdAsync(id);
+            await _repository.DeleteAsync(label);
         }
     }
 }
