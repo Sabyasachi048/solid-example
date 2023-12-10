@@ -15,9 +15,8 @@ namespace SolidExample
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddAutoMapper(AutoMapperHelper.Configuration);
 
-            builder.Services.AddDbContext<SolidExampleDbContext>();
+            ServicesHelper.ConfigureServices(builder.Services);
 
             var app = builder.Build();
 
