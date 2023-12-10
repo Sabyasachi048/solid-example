@@ -6,10 +6,11 @@ namespace SolidExample.Services
 {
     public interface IUserService
     {
-        Task AddOrUpdate(UserBO entry);
+        Task AddOrUpdateAsync(UserBO entry);
         Task<IEnumerable<UserBO>> GetAsync();
-        Task<UserBO> GetById(Guid id);
-        Task Remove(Guid id);
+        Task<UserBO> GetByIdAsync(Guid id);
+        Task RemoveAsync(Guid id);
         IEnumerable<UserBO> Where(Expression<Func<User, bool>> exp);
+        string SendEmail(string email);
     }
 }

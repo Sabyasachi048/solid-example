@@ -16,12 +16,12 @@ namespace SolidExample.Services
             _entities = context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _entities.ToListAsync();
         }
 
-        public async Task<T> GetById(Guid guid)
+        public async Task<T> GetByIdAsync(Guid guid)
         {
             return await _entities.SingleOrDefaultAsync(s => s.Id == guid);
         }
@@ -32,7 +32,7 @@ namespace SolidExample.Services
         }
 
 
-        public async Task Insert(T entity)
+        public async Task InsertAsync(T entity)
         {
             if (entity == null)
             {
@@ -42,7 +42,7 @@ namespace SolidExample.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             if (entity == null)
             {
@@ -54,7 +54,7 @@ namespace SolidExample.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             if (entity == null)
             {

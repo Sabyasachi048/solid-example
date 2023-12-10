@@ -6,10 +6,10 @@ namespace SolidExample.Services
 {
     public interface IAuthorService
     {
-        Task AddOrUpdate(AuthorBO entry);
+        Task AddOrUpdateAsync(AuthorBO entry);
         Task<IEnumerable<AuthorBO>> GetAsync();
-        Task<AuthorBO> GetById(Guid id);
-        Task Remove(Guid id);
+        Task<AuthorBO> GetByIdAsync(Guid id);
+        Task RemoveAsync(Guid id);
         IEnumerable<AuthorBO> Where(Expression<Func<Author, bool>> exp);
     }
 }

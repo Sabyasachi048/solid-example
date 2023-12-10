@@ -15,7 +15,7 @@ namespace SolidExample.Services
             _service = service;
             _mapper = mapper;
         }
-        public async Task AddOrUpdate(AuthorBO entry)
+        public async Task AddOrUpdateAsync(AuthorBO entry)
         {
             await _service.AddOrUpdateAsync(_mapper.Map<Author>(entry));
         }
@@ -25,11 +25,11 @@ namespace SolidExample.Services
             return result;
 
         }
-        public async Task<AuthorBO> GetById(Guid id)
+        public async Task<AuthorBO> GetByIdAsync(Guid id)
         {
             return _mapper.Map<AuthorBO>(await _service.GetByIdAsync(id));
         }
-        public async Task Remove(Guid id)
+        public async Task RemoveAsync(Guid id)
         {
             await _service.RemoveAsync(id);
         }
